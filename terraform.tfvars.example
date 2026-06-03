@@ -1,0 +1,10 @@
+# Copiar este archivo a terraform.tfvars y completar con los valores reales
+# ADVERTENCIA: No commitear terraform.tfvars si contiene datos sensibles
+
+vpc_id           = "vpc-XXXXXXXXXXXXXXXXX"
+subnet_id        = "subnet-XXXXXXXXXXXXXXXXX"
+ami_id           = "ami-XXXXXXXXXXXXXXXXX"   # Amazon Linux 2023 en la región correspondiente
+instance_type    = "t2.micro"
+allowed_ssh_cidr = "0.0.0.0/0"              # Restringir a la IP/CIDR administrativo real
+project_name     = "mi-proyecto-ecs"
+connection_test  = "prueba-conectividad-v1"
