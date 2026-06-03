@@ -1,10 +1,10 @@
 resource "aws_security_group" "ec2_sg" {
   name        = "${var.project_name}-ec2-bastion-sg"
-  description = "Security Group para la instancia bastión EC2"
+  description = "Security Group - EC2 bastion instance"
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "SSH administrativo restringido por CIDR"
+    description = "SSH admin access restricted by CIDR"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -12,7 +12,7 @@ resource "aws_security_group" "ec2_sg" {
   }
 
   egress {
-    description = "Todo el tráfico saliente (SSM + actualizaciones)"
+    description = "All outbound traffic (SSM + package updates)"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -27,11 +27,11 @@ resource "aws_security_group" "ec2_sg" {
 
 resource "aws_security_group" "ecs_sg" {
   name        = "${var.project_name}-ecs-cluster-sg"
-  description = "Security Group para el clúster ECS — acceso solo desde el bastión EC2"
+  description = "Security Group - ECS cluster, inbound only from bastion SG"
   vpc_id      = var.vpc_id
 
   ingress {
-    description     = "Tráfico de servicio únicamente desde el bastión EC2"
+    description     = "Service traffic only from EC2 bastion SG"
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
@@ -39,7 +39,7 @@ resource "aws_security_group" "ecs_sg" {
   }
 
   egress {
-    description = "Todo el tráfico saliente"
+    description = "All outbound traffic"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
